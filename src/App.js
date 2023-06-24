@@ -6,7 +6,7 @@ import CreateVideogame from "./components/createVideogame/CreateVideogame.jsx";
 import Detail from "./components/detail/Detail.jsx";
 import About from "./components/about/About.jsx";
 import './App.css';
-axios.defaults.baseURL = `https://deployvideogames-production-e09f.up.railway.app/`;
+axios.defaults.baseURL = `http://localhost:3001/`;
 
 
 function App() {
