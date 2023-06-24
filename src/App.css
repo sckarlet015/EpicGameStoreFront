@@ -1,10 +1,5 @@
 .App {
   text-align: center;
-  margin-top: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
-  background-image: url("./components/img/backFood.webp");
-  background-size: cover;
 }
 
 .App-logo {
@@ -37,7 +32,6 @@
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }

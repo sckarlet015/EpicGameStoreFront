@@ -1,27 +1,38 @@
-//Bibliotecas
-import { NavLink } from "react-router-dom";
-import React from 'react';
-//Estilos
-import styles from "./Card.module.css";
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./card.module.css";
+import noImage from "./noImageFound.jpg"
 
-export default function Card(props) {
+export default function Card({ name, genres, Genres, image, id }) {
+  let genreList = [];
+
+  if (genres) {
+    genreList = genres;
+  } else if (Genres) {
+    genreList = Genres.map((genre) => ({
+      id: "",
+      name: genre.name,
+    }));
+  } 
+
   return (
     <div className={styles.card}>
-      <NavLink to={`/detail/${props.id}`}>
-        <h3 className={styles.name}>
-          {props.name}
-        </h3>
-      </NavLink>
-      <img src={props.image} alt="Receta" />
-      {props.diets && props.diets.length > 0 && (
-        <div className={styles.info}>
-          <div className={styles.type}>
-            {props.diets.map((ele, index) => (
-              <span className={styles.diet} key={`${ele}-${index}`}>{ele}</span>
+      <Link to={id === -5 ? "/videogame" : (id === -6 ? "#" : `/home/${id}`)} key={id}>
+        <img className={styles.image} src={image || noImage} alt="image not found" />
+        <h3 className={styles.cardTitle}>{name}</h3>
+        <div className={styles.cardGenres}>
+          {!(id === -5 || id === -6) && <h4>Genres: </h4>}
+          <ul>
+            {genreList.map((genre) => (
+              <li key={genre.id}>{genre.name}</li>
             ))}
-          </div>
+          </ul>
         </div>
-      )}
+      </Link>
     </div>
   );
 }
+
+
+
+
