@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./card.module.css";
-import noImage from "./noImageFound.jpg"
+import styles from "./Card.module.css";
+import noImage from "./noImageFound.jpg";
 
-export default function Card({ name, genres, Genres, image, id }) {
+export default function Card({ name, price, genres, Genres, image, id }) {
   let genreList = [];
 
   if (genres) {
@@ -13,26 +13,30 @@ export default function Card({ name, genres, Genres, image, id }) {
       id: "",
       name: genre.name,
     }));
-  } 
+  }
 
   return (
     <div className={styles.card}>
-      <Link to={id === -5 ? "/videogame" : (id === -6 ? "#" : `/home/${id}`)} key={id}>
-        <img className={styles.image} src={image || noImage} alt="image not found" />
+      <Link
+        to={id === -5 ? "/videogame" : id === -6 ? "#" : `/home/${id}`}
+        key={id}
+      >
+        <img
+          className={styles.image}
+          src={image || noImage}
+          alt="image not found"
+        />
         <h3 className={styles.cardTitle}>{name}</h3>
-        <div className={styles.cardGenres}>
+        {/* <div className={styles.cardGenres}>
           {!(id === -5 || id === -6) && <h4>Genres: </h4>}
           <ul>
             {genreList.map((genre) => (
               <li key={genre.id}>{genre.name}</li>
             ))}
           </ul>
-        </div>
+        </div> */}
+        <h3 className={styles.cardTitle}>Price: $ {price}</h3>
       </Link>
     </div>
   );
 }
-
-
-
-
