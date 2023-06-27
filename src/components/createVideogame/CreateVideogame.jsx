@@ -229,7 +229,7 @@ export default function CreateVideogame(){
                             <label>Genre: </label>
                             <select onChange={e => handleGenreSelect(e.target.value)}>
                                 {genres.map((genre) => (
-                                    <option value={genre.id}>{genre.genreName}</option>
+                                    <option key={genre.id} value={genre.id}>{genre.genreName}</option>
                                 ))}
                             </select>
                             {errors.genreIds && (
@@ -240,7 +240,7 @@ export default function CreateVideogame(){
                             <label>Platform: </label>
                             <select onChange={e => handlePlatformSelect(e.target.value)}>
                                 {platforms.map((platform) => (
-                                    <option value={platform.id}>{platform.platformName}</option>
+                                    <option key={platform.id} value={platform.id}>{platform.platformName}</option>
                                 ))}
                             </select>
                             {errors.platforms && (
