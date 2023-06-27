@@ -4,6 +4,8 @@ import styles from "./Card.module.css";
 import noImage from "./noImageFound.jpg";
 
 export default function Card({ name, price, genres, Genres, image, id }) {
+
+  console.log(id);
   let genreList = [];
 
   if (genres) {
@@ -35,7 +37,7 @@ export default function Card({ name, price, genres, Genres, image, id }) {
             ))}
           </ul>
         </div> */}
-        <h3 className={styles.cardTitle}>Price: $ {price}</h3>
+        <h3 className={styles.cardTitle}>Price: U$S {price}</h3>
       </Link>
     </div>
   );

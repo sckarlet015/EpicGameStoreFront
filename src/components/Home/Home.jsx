@@ -156,7 +156,7 @@ export default function Home() {
                 <option value="zToA">Z to A</option>
               </select>
             </div>
-            <div>
+            {/* <div>
               <label className={styles.label}>Origin: </label>
               <select
                 onChange={(e) => handleFilterOrigin(e)}
@@ -167,7 +167,7 @@ export default function Home() {
                 <option value="db">Database</option>
                 <option value="api">Api</option>
               </select>
-            </div>
+            </div> */}
           </div>
           <div>
             <SearchBar />
@@ -189,7 +189,7 @@ export default function Home() {
                     // genres={el.genres}
                     price={el.price}
                     image={el.background_image || el.image}
-                    id={el.id}
+                    id={el.apiId}
                     key={el.id}
                   />
                 ))}
