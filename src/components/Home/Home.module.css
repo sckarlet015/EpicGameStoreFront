@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&family=Ubuntu&display=swap');
+
+:root {
+    --melon: #E9AA94ff;
+    --salmon: #DA8673ff;
+    --moonstone: #76ADBEff;
+    --rust: #AA5637ff;
+    --paynes-gray: #4B6979ff;
+    --gunmetal: #2D3A44ff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-evenly; 
+    align-items: center;
+    background-color: var(--moonstone);
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .heading {
+    color: var(--gunmetal);
+    font-size: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .button {
+    display: inline-block;
+    padding: 6px 12px; 
+    background-color: var(--melon);
+    color: var(--gunmetal);
+    text-decoration: none;
+    font-size: 14px; 
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  .button:hover {
+    background-color: var(--gunmetal);
+    color: var(--melon);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+
+.container {
+    background-color: var(--gunmetal);
+}
+
+.searchBarContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust the height as needed */
+  }
+  
+
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.noGame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+.filter-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-gap: 10px;
+    align-items: center;
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+.filter-container select {
+    padding: 8px;
+    border: none;
+    background-color: var(--gunmetal);
+    color: var(--moonstone);
+    font-size: 16px;
+}
+  
+.filter-container select option {
+    background-color: var(--gunmetal);
+    color: var(--moonstone);
+}
+
+.filter-container select {
+    padding: 8px;
+    border: none;
+    background-color: var(--gunmetal);
+    color: var(--moonstone);
+    font-size: 16px;
+}
+  
+.filter-container select option {
+    background-color: var(--gunmetal);
+    color: var(--moonstone);
+}
+
+.label {
+    margin-right: 8px;
+    color: var(--moonstone);
+}
+
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 40px;
+}

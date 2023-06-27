@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&family=Ubuntu&display=swap');
+
+:root {
+  --melon: #E9AA94ff;
+  --salmon: #DA8673ff;
+  --moonstone: #76ADBEff;
+  --rust: #AA5637ff;
+  --paynes-gray: #4B6979ff;
+  --gunmetal: #2D3A44ff;
+}
+
+img{
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+  width: calc(100% - 20px); /* Adjust the width as needed */
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom right, var(--paynes-gray), var(--moonstone));
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.image {
+  width: 100%; /* Adjust the image size as needed */
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
+
+.cardTitle {
+  color: var(--gunmetal);
+  font-family: 'Monomaniac One', cursive;
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 25px;
+  font-family: 'Monomaniac One';
+  color: var(--gunmetal);
+}
+
+li {
+  font-size: 20px;
+  font-family: "Monomaniac One";
+}
+
+ul {
+  margin-bottom: 20px;
+}
+
+.card a {
+  color: var(--gunmetal);
+  text-decoration: none;
+}
