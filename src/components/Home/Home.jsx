@@ -123,12 +123,9 @@ export default function Home() {
       ) : (
         <div className={styles.container}>
           <div className={styles.header}>
-            <h1 className={styles.heading}>Henry Videogames PI</h1>
+            <h1 className={styles.heading}>Epic Games Shop</h1>
             <Link to="/videogame" className={styles.button}>
-              Create Videogame
-            </Link>
-            <Link to="/about" className={styles.button}>
-              About
+              Create Videogame 
             </Link>
           </div>
           <div className={styles["filter-container"]}>
