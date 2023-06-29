@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 import noImage from "./noImageFound.jpg";
 
-export default function Card({ name, price, genres, Genres, image, id }) {
+export default function Card({ name, price, genres, Genres, image, id , handleClickCart, item}) {
 
   console.log(id);
   let genreList = [];
@@ -39,6 +39,7 @@ export default function Card({ name, price, genres, Genres, image, id }) {
         </div> */}
         <h3 className={styles.cardTitle}>Price: U$S {price}</h3>
       </Link>
+      <button onClick={() => handleClickCart(item)}>Add to cart</button>
     </div>
   );
 }

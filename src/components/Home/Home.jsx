@@ -15,8 +15,28 @@ import LoadingPage from "../loadingPage/LoadingPage.jsx";
 import styles from "./Home.module.css";
 import noGameFif from "./noGame.gif";
 import noGameSearh from "./noGameSearch.gif";
+import NavBar from "../NavBar/NavBar.jsx";
 
 export default function Home() {
+
+  //estado del carrito
+
+  const [currentCart, setCurrentCart] = useState([])
+
+
+  function handleClickCart(item){
+    let isPresent = false;
+    currentCart.forEach(product => {
+      if(item.id === product.id)
+        isPresent = true;
+    });
+    if(isPresent)
+    return;
+    setCurrentCart([...currentCart, item]);
+  }
+
+  //estado del carrito
+
   const dispatch = useDispatch();
   const location = useLocation();
   const allVideogames = useSelector((state) => state.videogames);
@@ -124,9 +144,11 @@ export default function Home() {
         <div className={styles.container}>
           <div className={styles.header}>
             <h1 className={styles.heading}>Epic Games Shop</h1>
-            <Link to="/videogame" className={styles.button}>
+
+            <NavBar size={currentCart.length} />
+            {/* <Link to="/videogame" className={styles.button}>
               Create Videogame 
-            </Link>
+            </Link> */}
           </div>
           <div className={styles["filter-container"]}>
             <div>
@@ -182,6 +204,8 @@ export default function Home() {
               <div className={styles["card-container"]}>
                 {currentVideogames.map((el) => (
                   <Card
+                    item={el}
+                    handleClickCart={handleClickCart}
                     name={el.name}
                     // genres={el.genres}
                     price={el.price}
