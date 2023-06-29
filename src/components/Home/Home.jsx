@@ -7,12 +7,76 @@ import Card from "../Card/Card.jsx";
 import Pages from "../pages/Pages.jsx";
 import SearchBar from "../searchBar/SearchBar.jsx";
 import LoadingPage from "../loadingPage/LoadingPage.jsx";
-import styles from "./Home.module.css"
-import noGameFif from "./noGame.gif"
-import noGameSearh from "./noGameSearch.gif"
-import { initMercadoPago } from '@mercadopago/sdk-react';
+import styles from "./Home.module.css";
+import noGameFif from "./noGame.gif";
+import noGameSearh from "./noGameSearch.gif";
+import NavBar from "../NavBar/NavBar.jsx";
 
-import { Payment } from '@mercadopago/sdk-react';
+//////////////
+
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import axios from "axios"
+
+/////////////
+
+export default function Home() {
+
+  /////////////////////////////
+  //estado preferenceId
+  const [preferenceId, setPreferenceId] = useState(null)
+  initMercadoPago('');
+
+  const createPreference = async () =>{
+    try {
+      const response = await axios.post("http://localhost:8080/create_preference",{
+        description: "Bananita contenta",
+        price: 100,
+        quantity: 1,
+        // currency_id:"ARS"
+      })
+      const { id } = response.data
+      return id
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleBuy = async () => {
+    const id = await createPreference()
+    if(id){
+      setPreferenceId(id)
+    }
+  }
+/////////////////////////////
+
+  //estado del carrito
+  const [currentCart, setCurrentCart] = useState([])
+
+
+  function handleClickCart(item){
+    let isPresent = false;
+    currentCart.forEach(product => {
+      if(item.id === product.id)
+        isPresent = true;
+    });
+    if(isPresent)
+    return;
+    setCurrentCart([...currentCart, item]);
+  }
+
+  //estado del carrito
+
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const allVideogames = useSelector((state) => state.videogames);
+  console.log(allVideogames);
+  const pageNumber = useSelector((state) => state.currentPage);
+  const origin = useSelector((state) => state.origin || "all");
+  const [videogamesPerPage, setVideogamesPerPage] = useState(15);
+  const [ratingOrder, setRatingOrder] = useState("");
+  const [alphabeticalOrder, setAlphabeticalOrder] = useState("");
+  const indexOfLastVideogame = pageNumber * videogamesPerPage; // 15
+  const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; // 0
 
 export default function Home (){
     const dispatch = useDispatch();
@@ -127,6 +191,7 @@ export default function Home (){
         dispatch({ type: "SORT_BY_RATING", payload: order });
       };
 
+<<<<<<< HEAD
       const handleAlphabeticalOrder = (e) => {
         e.preventDefault();
         const order = e.target.value;
@@ -179,6 +244,132 @@ export default function Home (){
                     <option value="api">Api</option>
                   </select>
                 </div>
+=======
+  const handleRatingSort = (e) => {
+    e.preventDefault();
+    const order = e.target.value;
+    if (order === "na") {
+      return;
+    }
+    const alphabetSelect = document.getElementById("alphabeticalOrder");
+    if (alphabetSelect) {
+      alphabetSelect.selectedIndex = 0;
+    }
+    dispatch(setCurrentPage(1));
+    setRatingOrder(`Order ${order}`);
+    dispatch({ type: "SORT_BY_RATING", payload: order });
+  };
+
+  const handleAlphabeticalOrder = (e) => {
+    e.preventDefault();
+    const order = e.target.value;
+    if (order === "na") {
+      return;
+    }
+    const ratingSelect = document.getElementById("ratingOrder");
+    if (ratingSelect) {
+      ratingSelect.selectedIndex = 0;
+    }
+    dispatch(setCurrentPage(1));
+    setAlphabeticalOrder(`order ${order}`);
+    dispatch({ type: "SORT_BY_ALPHABET", payload: order });
+  };
+
+  const currentVideogames =
+    allVideogames && allVideogames.length
+      ? allVideogames.slice(indexOfFirstVideogame, indexOfLastVideogame)
+      : [];
+  return (
+    <div>
+      {(
+        origin === "db" || origin === "search"
+          ? !allVideogames
+          : !allVideogames || allVideogames.length === 0
+      ) ? (
+        <LoadingPage />
+      ) : (
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <h1 className={styles.heading}>Epic Games Shop</h1>
+
+            <NavBar size={currentCart.length} />
+            {/* <Link to="/videogame" className={styles.button}>
+              Create Videogame 
+            </Link> */}
+          </div>
+          <div className={styles["filter-container"]}>
+            <div>
+              <label className={styles.label}>Rating: </label>
+              <select
+                onChange={(e) => handleRatingSort(e)}
+                className={styles.select}
+                id="ratingOrder"
+              >
+                <option value="na"> -- </option>
+                <option value="lToH">Lowest to highest</option>
+                <option value="hToL">Highest to lowest</option>
+              </select>
+            </div>
+            <div>
+              <label className={styles.label}>Alphabetical order: </label>
+              <select
+                onChange={(e) => handleAlphabeticalOrder(e)}
+                className={styles.select}
+                id="alphabeticalOrder"
+              >
+                <option value="na"> -- </option>
+                <option value="aToZ">A to Z</option>
+                <option value="zToA">Z to A</option>
+              </select>
+            </div>
+            {/* <div>
+              <label className={styles.label}>Origin: </label>
+              <select
+                onChange={(e) => handleFilterOrigin(e)}
+                className={styles.select}
+                id="originSelect"
+              >
+                <option value="all">All videogames</option>
+                <option value="db">Database</option>
+                <option value="api">Api</option>
+              </select>
+            </div> */}
+          </div>
+          <div>
+            <SearchBar />
+
+            {/* ////////////////// */}
+
+            <button onClick={handleBuy}>MERCADO PAGO</button>
+            {preferenceId &&  <Wallet initialization={{ preferenceId: preferenceId }} />}
+
+            {/* ////////////////// */}
+
+            <button onClick={(e) => handleClick(e)} className={styles.button}>
+              Reload videogames
+            </button>
+            <Pages
+              videogamesPerPage={videogamesPerPage}
+              allVideogames={allVideogames.length}
+              pages={pageNumber}
+            />
+          </div>
+          <div className={styles.card}>
+            {currentVideogames && currentVideogames.length > 0 ? (
+              <div className={styles["card-container"]}>
+                {currentVideogames.map((el) => (
+                  <Card
+                    item={el}
+                    handleClickCart={handleClickCart}
+                    name={el.name}
+                    // genres={el.genres}
+                    price={el.price}
+                    image={el.background_image || el.image}
+                    id={el.apiId}
+                    key={el.id}
+                  />
+                ))}
+>>>>>>> f5e994d759e1b85a68da32ea91ab4435a1c4b26d
               </div>
               <div>
                 <SearchBar/>
