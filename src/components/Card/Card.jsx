@@ -3,8 +3,16 @@ import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 import noImage from "./noImageFound.jpg";
 
-export default function Card({ name, price, genres, Genres, image, id , handleClickCart, item}) {
-
+export default function Card({
+  name,
+  price,
+  genres,
+  Genres,
+  image,
+  id,
+  handleClickCart,
+  item,
+}) {
   console.log(id);
   let genreList = [];
 
@@ -16,6 +24,8 @@ export default function Card({ name, price, genres, Genres, image, id , handleCl
       name: genre.name,
     }));
   }
+
+  const addCarrito = () => {};
 
   return (
     <div className={styles.card}>
