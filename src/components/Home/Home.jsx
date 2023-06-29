@@ -15,13 +15,15 @@ import LoadingPage from "../loadingPage/LoadingPage.jsx";
 import styles from "./Home.module.css";
 import noGameFif from "./noGame.gif";
 import noGameSearh from "./noGameSearch.gif";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import axios from "axios"
 
 export default function Home() {
 
   /////////////////////////////
   //estado preferenceId
   const [preferenceId, setPreferenceId] = useState(null)
-  initMercadoPago('');
+  initMercadoPago('TEST-ba7e0c4b-3acf-42aa-8d43-f00632b88f1d');
 
   const createPreference = async () =>{
     try {

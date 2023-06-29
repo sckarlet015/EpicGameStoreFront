@@ -5,7 +5,6 @@ import Home from "./components/Home/Home.jsx";
 import CreateVideogame from "./components/createVideogame/CreateVideogame.jsx";
 import Detail from "./components/detail/Detail.jsx";
 import About from "./components/about/About.jsx";
-import Buy from "./components/Buy/Buy.jsx";
 import "./App.css";
 axios.defaults.baseURL = `http://localhost:3001/`;
 
@@ -19,7 +18,7 @@ function App() {
           <Route path="/home" component={Home} />
           <Route path="/videogame" component={CreateVideogame} />
           <Route path="/about" component={About} />
-          <Route path="/buy" component={Buy} />
+      
           {/* <Route path = "/carrito" component = { addCarrito }/> */}
         </Switch>
       </div>
