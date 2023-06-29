@@ -17,6 +17,52 @@ import noGameFif from "./noGame.gif";
 import noGameSearh from "./noGameSearch.gif";
 
 export default function Home() {
+
+  /////////////////////////////
+  //estado preferenceId
+  const [preferenceId, setPreferenceId] = useState(null)
+  initMercadoPago('');
+
+  const createPreference = async () =>{
+    try {
+      const response = await axios.post("http://localhost:3001/pay/create_preference",{
+        description: "Bananita contenta",
+        price: 100,
+        quantity: 1,
+        // currency_id:"ARS"
+      })
+      const { id } = response.data
+      return id
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleBuy = async () => {
+    const id = await createPreference()
+    if(id){
+      setPreferenceId(id)
+    }
+  }
+/////////////////////////////
+
+  //estado del carrito
+  const [currentCart, setCurrentCart] = useState([])
+
+
+  function handleClickCart(item){
+    let isPresent = false;
+    currentCart.forEach(product => {
+      if(item.id === product.id)
+        isPresent = true;
+    });
+    if(isPresent)
+    return;
+    setCurrentCart([...currentCart, item]);
+  }
+
+  //estado del carrito
+
   const dispatch = useDispatch();
   const location = useLocation();
   const allVideogames = useSelector((state) => state.videogames);
