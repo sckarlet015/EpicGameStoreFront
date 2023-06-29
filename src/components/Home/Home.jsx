@@ -1,7 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames, filterVideogamesByOrigin, setCurrentPage, setOrigin } from "../../actions/index.js";
+import {
+  getVideogames,
+  filterVideogamesByOrigin,
+  setCurrentPage,
+  setOrigin,
+} from "../../actions/index.js";
 import { Link, useLocation } from "react-router-dom";
 import Card from "../Card/Card.jsx";
 import Pages from "../pages/Pages.jsx";
@@ -10,62 +15,8 @@ import LoadingPage from "../loadingPage/LoadingPage.jsx";
 import styles from "./Home.module.css";
 import noGameFif from "./noGame.gif";
 import noGameSearh from "./noGameSearch.gif";
-import NavBar from "../NavBar/NavBar.jsx";
-
-//////////////
-
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import axios from "axios"
-
-/////////////
 
 export default function Home() {
-
-  /////////////////////////////
-  //estado preferenceId
-  const [preferenceId, setPreferenceId] = useState(null)
-  initMercadoPago('');
-
-  const createPreference = async () =>{
-    try {
-      const response = await axios.post("http://localhost:8080/create_preference",{
-        description: "Bananita contenta",
-        price: 100,
-        quantity: 1,
-        // currency_id:"ARS"
-      })
-      const { id } = response.data
-      return id
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const handleBuy = async () => {
-    const id = await createPreference()
-    if(id){
-      setPreferenceId(id)
-    }
-  }
-/////////////////////////////
-
-  //estado del carrito
-  const [currentCart, setCurrentCart] = useState([])
-
-
-  function handleClickCart(item){
-    let isPresent = false;
-    currentCart.forEach(product => {
-      if(item.id === product.id)
-        isPresent = true;
-    });
-    if(isPresent)
-    return;
-    setCurrentCart([...currentCart, item]);
-  }
-
-  //estado del carrito
-
   const dispatch = useDispatch();
   const location = useLocation();
   const allVideogames = useSelector((state) => state.videogames);
@@ -78,173 +29,55 @@ export default function Home() {
   const indexOfLastVideogame = pageNumber * videogamesPerPage; // 15
   const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; // 0
 
-export default function Home (){
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const allVideogames = useSelector((state) => state.videogames);
-    const pageNumber = useSelector((state) => state.currentPage);
-    const origin = useSelector((state) => state.origin || "all");
-    const [videogamesPerPage, setVideogamesPerPage] = useState(15);
-    const [ratingOrder, setRatingOrder] = useState("");
-    const [alphabeticalOrder, setAlphabeticalOrder] = useState("");
-    const indexOfLastVideogame = pageNumber * videogamesPerPage; // 15
-    const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; // 0 
-    
+  useEffect(() => {
+    dispatch(getVideogames());
 
-    useEffect(() => {
-        dispatch(getVideogames());
-        initMercadoPago('TEST-ba7e0c4b-3acf-42aa-8d43-f00632b88f1d');
-        const handleLocationChange = () => {
-          dispatch(setCurrentPage(1));
-        };
-      
-        window.addEventListener('popstate', handleLocationChange);
-        
-        return () => {
-          dispatch(setCurrentPage(1));  
-          dispatch(setOrigin("all"));
-          setRatingOrder("");
-          setAlphabeticalOrder("");
-        };
-      }, [dispatch, location.pathname]);
-      const initialization = {
-        amount: 100,
-       };
-       const onSubmit = async (formData) => {
-        // callback llamado al hacer clic en el botón enviar datos
-        return new Promise((resolve, reject) => {
-          fetch('/process_payment', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          })
-            .then((response) => response.json())
-            .then((response) => {
-              // recibir el resultado del pago
-              resolve();
-            })
-            .catch((error) => {
-              // manejar la respuesta de error al intentar crear el pago
-              reject();
-            });
-        });
-      }
-      const onError = async (error) => {
-        // callback llamado para todos los casos de error de Brick
-        console.log(error);
-       };
-       
-       
-       const onReady = async () => {
-        /*
-          Callback llamado cuando Brick está listo.
-          Aquí puedes ocultar cargamentos de su sitio, por ejemplo.
-        */
-       };
-
-    function handleClick(e){
-        e.preventDefault();      
-        dispatch(setCurrentPage(1));  
-        dispatch(getVideogames());
-        dispatch(setOrigin("all"));
-        const originSelect = document.getElementById("originSelect");
-        if (originSelect) {
-          originSelect.selectedIndex = 0;
-        };
-        const alphabetSelect = document.getElementById("alphabeticalOrder");
-        if (alphabetSelect) {
-          alphabetSelect.selectedIndex = 0;
-        };
-        const ratingSelect = document.getElementById("ratingOrder");
-        if (ratingSelect) {
-          ratingSelect.selectedIndex = 0;
-        };
+    const handleLocationChange = () => {
+      dispatch(setCurrentPage(1));
     };
 
-    function handleFilterOrigin(e){
-        e.preventDefault();
-        const handleLocationChange = () => {
-          dispatch(setCurrentPage(1));
-        };
-      
-        window.addEventListener('popstate', handleLocationChange);
-        const origin = e.target.value
-        dispatch(setOrigin(origin));
-        dispatch(setCurrentPage(1));
-        dispatch(filterVideogamesByOrigin(origin));
+    window.addEventListener("popstate", handleLocationChange);
+
+    return () => {
+      dispatch(setCurrentPage(1));
+      dispatch(setOrigin("all"));
+      setRatingOrder("");
+      setAlphabeticalOrder("");
+    };
+  }, [dispatch, location.pathname]);
+
+  function handleClick(e) {
+    e.preventDefault();
+    dispatch(setCurrentPage(1));
+    dispatch(getVideogames());
+    dispatch(setOrigin("all"));
+    const originSelect = document.getElementById("originSelect");
+    if (originSelect) {
+      originSelect.selectedIndex = 0;
+    }
+    const alphabetSelect = document.getElementById("alphabeticalOrder");
+    if (alphabetSelect) {
+      alphabetSelect.selectedIndex = 0;
+    }
+    const ratingSelect = document.getElementById("ratingOrder");
+    if (ratingSelect) {
+      ratingSelect.selectedIndex = 0;
+    }
+  }
+
+  function handleFilterOrigin(e) {
+    e.preventDefault();
+    const handleLocationChange = () => {
+      dispatch(setCurrentPage(1));
     };
 
-    const handleRatingSort = (e) => {
-        e.preventDefault();
-        const order = e.target.value;
-        if (order === "na") {
-          return; 
-        };
-        const alphabetSelect = document.getElementById("alphabeticalOrder");
-        if (alphabetSelect) {
-          alphabetSelect.selectedIndex = 0;
-        };
-        dispatch(setCurrentPage(1));
-        setRatingOrder(`Order ${order}`);
-        dispatch({ type: "SORT_BY_RATING", payload: order });
-      };
+    window.addEventListener("popstate", handleLocationChange);
+    const origin = e.target.value;
+    dispatch(setOrigin(origin));
+    dispatch(setCurrentPage(1));
+    dispatch(filterVideogamesByOrigin(origin));
+  }
 
-<<<<<<< HEAD
-      const handleAlphabeticalOrder = (e) => {
-        e.preventDefault();
-        const order = e.target.value;
-        if (order === "na") {
-          return; 
-        };
-        const ratingSelect = document.getElementById("ratingOrder");
-        if (ratingSelect) {
-          ratingSelect.selectedIndex = 0;
-        };
-        dispatch(setCurrentPage(1));
-        setAlphabeticalOrder(`order ${order}`);
-        dispatch({ type: "SORT_BY_ALPHABET", payload: order });
-      }
-      
-      const currentVideogames = allVideogames && allVideogames.length ? allVideogames.slice(indexOfFirstVideogame, indexOfLastVideogame) : [];
-      return (
-        <div>
-          {((origin === "db" || origin === "search") ? !allVideogames : (!allVideogames || allVideogames.length === 0))  ? (
-              <LoadingPage/> 
-            ) : ( 
-            <div className={styles.container}>
-              <div className={styles.header}>
-                <h1 className={styles.heading}>Henry Videogames PI</h1>
-                <Link to="/videogame" className={styles.button}>Create Videogame</Link>
-                <Link to="/about" className={styles.button}>About</Link>
-              </div>
-              <div className={styles["filter-container"]}>
-                <div>
-                  <label className={styles.label}>Rating: </label>
-                  <select onChange={(e) => handleRatingSort(e)}className={styles.select} id = "ratingOrder">
-                  <option value="na">  --  </option>
-                    <option value="lToH">Lowest to highest</option>
-                    <option value="hToL">Highest to lowest</option>
-                  </select>
-                </div>
-                <div>
-                  <label className={styles.label}>Alphabetical order: </label>
-                    <select onChange={(e) => handleAlphabeticalOrder(e)}className={styles.select} id = "alphabeticalOrder">
-                    <option value="na">  --  </option>
-                    <option value="aToZ">A to Z</option>
-                    <option value="zToA">Z to A</option>
-                  </select>
-                </div>
-                <div>
-                  <label className={styles.label}>Origin: </label>
-                  <select onChange={(e) => handleFilterOrigin(e)} className={styles.select} id = "originSelect"> 
-                    <option value="all">All videogames</option>
-                    <option value="db">Database</option>
-                    <option value="api">Api</option>
-                  </select>
-                </div>
-=======
   const handleRatingSort = (e) => {
     e.preventDefault();
     const order = e.target.value;
@@ -290,12 +123,13 @@ export default function Home (){
       ) : (
         <div className={styles.container}>
           <div className={styles.header}>
-            <h1 className={styles.heading}>Epic Games Shop</h1>
-
-            <NavBar size={currentCart.length} />
-            {/* <Link to="/videogame" className={styles.button}>
-              Create Videogame 
-            </Link> */}
+            <h1 className={styles.heading}>Henry Videogames PI</h1>
+            <Link to="/videogame" className={styles.button}>
+              Create Videogame
+            </Link>
+            <Link to="/about" className={styles.button}>
+              About
+            </Link>
           </div>
           <div className={styles["filter-container"]}>
             <div>
@@ -337,14 +171,6 @@ export default function Home (){
           </div>
           <div>
             <SearchBar />
-
-            {/* ////////////////// */}
-
-            <button onClick={handleBuy}>MERCADO PAGO</button>
-            {preferenceId &&  <Wallet initialization={{ preferenceId: preferenceId }} />}
-
-            {/* ////////////////// */}
-
             <button onClick={(e) => handleClick(e)} className={styles.button}>
               Reload videogames
             </button>
@@ -359,8 +185,6 @@ export default function Home (){
               <div className={styles["card-container"]}>
                 {currentVideogames.map((el) => (
                   <Card
-                    item={el}
-                    handleClickCart={handleClickCart}
                     name={el.name}
                     // genres={el.genres}
                     price={el.price}
@@ -369,66 +193,35 @@ export default function Home (){
                     key={el.id}
                   />
                 ))}
->>>>>>> f5e994d759e1b85a68da32ea91ab4435a1c4b26d
               </div>
+            ) : (
               <div>
-                <SearchBar/>
-                  <button onClick={(e) => handleClick(e)} className={styles.button}>Reload videogames</button>
-                  <Pages
-                    videogamesPerPage={videogamesPerPage}
-                    allVideogames={allVideogames.length}
-                    pages={pageNumber}
+                {origin === "db" ? (
+                  <Card
+                    name={"No videogame Found, click here to create one"}
+                    image={noGameFif}
+                    id={-5}
+                    key={"noGameFound"}
                   />
-              </div>
-              <div className={styles.card}>
-                {currentVideogames && currentVideogames.length > 0 ? (
-                  <div className={styles["card-container"]}>
-                    {currentVideogames.map((el) => (
-                      <Card
-                        name={el.name}
-                        genres={el.genres}
-                        image={el.background_image || el.image}
-                        id={el.id}
-                        key={el.id}
-                      />
-                    ))}
-                  </div>
                 ) : (
-                  <div>
-                    {origin === "db" ? (
-                      <Card
-                        name={"No videogame Found, click here to create one"}
-                        image={noGameFif}
-                        id={-5}
-                        key={"noGameFound"}
-                      />
-                    ) : (
-                      <Card
-                        name={"No videogame Found in search results"}
-                        image={noGameSearh}
-                        id={-6}
-                        key={"noGameSearchFound"}
-                      />
-                    )}
-                  </div>
-                  )}
-                </div>
-                <div className={styles.paginationContainer}>
-                  <Pages
-                    videogamesPerPage={videogamesPerPage}
-                    allVideogames={allVideogames.length}
+                  <Card
+                    name={"No videogame Found in search results"}
+                    image={noGameSearh}
+                    id={-6}
+                    key={"noGameSearchFound"}
                   />
-                </div>
-                <div> <Payment
-                      initialization={initialization}
-                      onSubmit={onSubmit}
-                      onReady={onReady}
-                      onError={onError}/> 
-                </div>
-            </div>
-          )}  
+                )}
+              </div>
+            )}
+          </div>
+          <div className={styles.paginationContainer}>
+            <Pages
+              videogamesPerPage={videogamesPerPage}
+              allVideogames={allVideogames.length}
+            />
+          </div>
         </div>
-      );
-      
-};
-
+      )}
+    </div>
+  );
+}

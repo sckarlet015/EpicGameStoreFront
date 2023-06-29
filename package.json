@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "@mercadopago/sdk-react": "^0.0.12",
-=======
     "@mercadopago/sdk-react": "0.0.12",
->>>>>>> f5e994d759e1b85a68da32ea91ab4435a1c4b26d
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.1",
