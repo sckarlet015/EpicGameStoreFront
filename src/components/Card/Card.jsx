@@ -15,6 +15,8 @@ export default function Card({ name, price, genres, Genres, image, id }) {
     }));
   }
 
+  const addCarrito = () => {};
+
   return (
     <div className={styles.card}>
       <Link
@@ -27,16 +29,17 @@ export default function Card({ name, price, genres, Genres, image, id }) {
           alt="image not found"
         />
         <h3 className={styles.cardTitle}>{name}</h3>
-        {/* <div className={styles.cardGenres}>
-          {!(id === -5 || id === -6) && <h4>Genres: </h4>}
-          <ul>
-            {genreList.map((genre) => (
-              <li key={genre.id}>{genre.name}</li>
-            ))}
-          </ul>
-        </div> */}
+
         <h3 className={styles.cardTitle}>Price: $ {price}</h3>
       </Link>
+      <hr />
+      <button className={styles.buttonBuyVideoGame}>
+        <Link to="/buy">Comprar</Link>
+      </button>
+      <hr />
+      <button className={styles.buttonAddCarrito} onClick={addCarrito}>
+        Agregar al carrito
+      </button>
     </div>
   );
 }

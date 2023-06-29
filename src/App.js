@@ -5,22 +5,24 @@ import Home from "./components/Home/Home.jsx";
 import CreateVideogame from "./components/createVideogame/CreateVideogame.jsx";
 import Detail from "./components/detail/Detail.jsx";
 import About from "./components/about/About.jsx";
-import './App.css';
+import Buy from "./components/Buy/Buy.jsx";
+import "./App.css";
 axios.defaults.baseURL = `http://localhost:3001/`;
-
 
 function App() {
   return (
     <BrowserRouter>
-    <div className="App">
-      <Switch>
-        <Route exact path = "/" component = { LandingPage } />
-        <Route path = "/home/:id" component = { Detail }/>
-        <Route path = "/home" component = { Home }/>
-        <Route path = "/videogame" component = { CreateVideogame }/>
-        <Route path = "/about" component = { About }/>
-      </Switch>
-    </div>
+      <div className="App">
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/home/:id" component={Detail} />
+          <Route path="/home" component={Home} />
+          <Route path="/videogame" component={CreateVideogame} />
+          <Route path="/about" component={About} />
+          <Route path="/buy" component={Buy} />
+          {/* <Route path = "/carrito" component = { addCarrito }/> */}
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }
