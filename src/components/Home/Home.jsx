@@ -15,8 +15,62 @@ import LoadingPage from "../loadingPage/LoadingPage.jsx";
 import styles from "./Home.module.css";
 import noGameFif from "./noGame.gif";
 import noGameSearh from "./noGameSearch.gif";
+import NavBar from "../NavBar/NavBar.jsx";
+
+//////////////
+
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import axios from "axios"
+
+/////////////
 
 export default function Home() {
+
+  /////////////////////////////
+  //estado preferenceId
+  const [preferenceId, setPreferenceId] = useState(null)
+  initMercadoPago('');
+
+  const createPreference = async () =>{
+    try {
+      const response = await axios.post("http://localhost:8080/create_preference",{
+        description: "Bananita contenta",
+        price: 100,
+        quantity: 1,
+        // currency_id:"ARS"
+      })
+      const { id } = response.data
+      return id
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleBuy = async () => {
+    const id = await createPreference()
+    if(id){
+      setPreferenceId(id)
+    }
+  }
+/////////////////////////////
+
+  //estado del carrito
+  const [currentCart, setCurrentCart] = useState([])
+
+
+  function handleClickCart(item){
+    let isPresent = false;
+    currentCart.forEach(product => {
+      if(item.id === product.id)
+        isPresent = true;
+    });
+    if(isPresent)
+    return;
+    setCurrentCart([...currentCart, item]);
+  }
+
+  //estado del carrito
+
   const dispatch = useDispatch();
   const location = useLocation();
   const allVideogames = useSelector((state) => state.videogames);
@@ -123,13 +177,12 @@ export default function Home() {
       ) : (
         <div className={styles.container}>
           <div className={styles.header}>
-            <h1 className={styles.heading}>Henry Videogames PI</h1>
-            <Link to="/videogame" className={styles.button}>
-              Create Videogame
-            </Link>
-            <Link to="/about" className={styles.button}>
-              About
-            </Link>
+            <h1 className={styles.heading}>Epic Games Shop</h1>
+
+            <NavBar size={currentCart.length} />
+            {/* <Link to="/videogame" className={styles.button}>
+              Create Videogame 
+            </Link> */}
           </div>
           <div className={styles["filter-container"]}>
             <div>
@@ -156,7 +209,7 @@ export default function Home() {
                 <option value="zToA">Z to A</option>
               </select>
             </div>
-            <div>
+            {/* <div>
               <label className={styles.label}>Origin: </label>
               <select
                 onChange={(e) => handleFilterOrigin(e)}
@@ -167,10 +220,18 @@ export default function Home() {
                 <option value="db">Database</option>
                 <option value="api">Api</option>
               </select>
-            </div>
+            </div> */}
           </div>
           <div>
             <SearchBar />
+
+            {/* ////////////////// */}
+
+            <button onClick={handleBuy}>MERCADO PAGO</button>
+            {preferenceId &&  <Wallet initialization={{ preferenceId: preferenceId }} />}
+
+            {/* ////////////////// */}
+
             <button onClick={(e) => handleClick(e)} className={styles.button}>
               Reload videogames
             </button>
@@ -185,11 +246,13 @@ export default function Home() {
               <div className={styles["card-container"]}>
                 {currentVideogames.map((el) => (
                   <Card
+                    item={el}
+                    handleClickCart={handleClickCart}
                     name={el.name}
                     // genres={el.genres}
                     price={el.price}
                     image={el.background_image || el.image}
-                    id={el.id}
+                    id={el.apiId}
                     key={el.id}
                   />
                 ))}

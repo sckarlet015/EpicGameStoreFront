@@ -3,7 +3,17 @@ import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 import noImage from "./noImageFound.jpg";
 
-export default function Card({ name, price, genres, Genres, image, id }) {
+export default function Card({
+  name,
+  price,
+  genres,
+  Genres,
+  image,
+  id,
+  handleClickCart,
+  item,
+}) {
+  console.log(id);
   let genreList = [];
 
   if (genres) {
@@ -29,17 +39,17 @@ export default function Card({ name, price, genres, Genres, image, id }) {
           alt="image not found"
         />
         <h3 className={styles.cardTitle}>{name}</h3>
-
-        <h3 className={styles.cardTitle}>Price: $ {price}</h3>
+        {/* <div className={styles.cardGenres}>
+          {!(id === -5 || id === -6) && <h4>Genres: </h4>}
+          <ul>
+            {genreList.map((genre) => (
+              <li key={genre.id}>{genre.name}</li>
+            ))}
+          </ul>
+        </div> */}
+        <h3 className={styles.cardTitle}>Price: U$S {price}</h3>
       </Link>
-      <hr />
-      <button className={styles.buttonBuyVideoGame}>
-        <Link to="/buy">Comprar</Link>
-      </button>
-      <hr />
-      <button className={styles.buttonAddCarrito} onClick={addCarrito}>
-        Agregar al carrito
-      </button>
+      <button onClick={() => handleClickCart(item)}>Add to cart</button>
     </div>
   );
 }

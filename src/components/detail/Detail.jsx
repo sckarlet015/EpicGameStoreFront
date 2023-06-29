@@ -14,6 +14,8 @@ export default function Detail(props) {
 
   const videogameDetail = useSelector((state) => state.detail);
 
+  console.log(videogameDetail);
+
   const origin = isNaN(id) ? "db" : "api";
 
   let apiRatings = [];
