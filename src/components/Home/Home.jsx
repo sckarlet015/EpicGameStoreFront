@@ -17,10 +17,44 @@ import noGameFif from "./noGame.gif";
 import noGameSearh from "./noGameSearch.gif";
 import NavBar from "../NavBar/NavBar.jsx";
 
+//////////////
+
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import axios from "axios"
+
+/////////////
+
 export default function Home() {
 
-  //estado del carrito
+  /////////////////////////////
+  //estado preferenceId
+  const [preferenceId, setPreferenceId] = useState(null)
+  initMercadoPago('');
 
+  const createPreference = async () =>{
+    try {
+      const response = await axios.post("http://localhost:8080/create_preference",{
+        description: "Bananita contenta",
+        price: 100,
+        quantity: 1,
+        // currency_id:"ARS"
+      })
+      const { id } = response.data
+      return id
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleBuy = async () => {
+    const id = await createPreference()
+    if(id){
+      setPreferenceId(id)
+    }
+  }
+/////////////////////////////
+
+  //estado del carrito
   const [currentCart, setCurrentCart] = useState([])
 
 
@@ -190,6 +224,14 @@ export default function Home() {
           </div>
           <div>
             <SearchBar />
+
+            {/* ////////////////// */}
+
+            <button onClick={handleBuy}>MERCADO PAGO</button>
+            {preferenceId &&  <Wallet initialization={{ preferenceId: preferenceId }} />}
+
+            {/* ////////////////// */}
+
             <button onClick={(e) => handleClick(e)} className={styles.button}>
               Reload videogames
             </button>
