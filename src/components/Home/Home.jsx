@@ -3,13 +3,16 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideogames, filterVideogamesByOrigin, setCurrentPage, setOrigin } from "../../actions/index.js";
 import { Link, useLocation } from "react-router-dom";
-import Card from "../card/Card.jsx";
+import Card from "../Card/Card.jsx";
 import Pages from "../pages/Pages.jsx";
 import SearchBar from "../searchBar/SearchBar.jsx";
 import LoadingPage from "../loadingPage/LoadingPage.jsx";
-import styles from "./home.module.css"
+import styles from "./Home.module.css"
 import noGameFif from "./noGame.gif"
 import noGameSearh from "./noGameSearch.gif"
+import { initMercadoPago } from '@mercadopago/sdk-react';
+
+import { Payment } from '@mercadopago/sdk-react';
 
 export default function Home (){
     const dispatch = useDispatch();
@@ -22,11 +25,11 @@ export default function Home (){
     const [alphabeticalOrder, setAlphabeticalOrder] = useState("");
     const indexOfLastVideogame = pageNumber * videogamesPerPage; // 15
     const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage; // 0 
-
+    
 
     useEffect(() => {
         dispatch(getVideogames());
-
+        initMercadoPago('TEST-ba7e0c4b-3acf-42aa-8d43-f00632b88f1d');
         const handleLocationChange = () => {
           dispatch(setCurrentPage(1));
         };
@@ -40,6 +43,42 @@ export default function Home (){
           setAlphabeticalOrder("");
         };
       }, [dispatch, location.pathname]);
+      const initialization = {
+        amount: 100,
+       };
+       const onSubmit = async (formData) => {
+        // callback llamado al hacer clic en el botón enviar datos
+        return new Promise((resolve, reject) => {
+          fetch('/process_payment', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              // recibir el resultado del pago
+              resolve();
+            })
+            .catch((error) => {
+              // manejar la respuesta de error al intentar crear el pago
+              reject();
+            });
+        });
+      }
+      const onError = async (error) => {
+        // callback llamado para todos los casos de error de Brick
+        console.log(error);
+       };
+       
+       
+       const onReady = async () => {
+        /*
+          Callback llamado cuando Brick está listo.
+          Aquí puedes ocultar cargamentos de su sitio, por ejemplo.
+        */
+       };
 
     function handleClick(e){
         e.preventDefault();      
@@ -189,8 +228,14 @@ export default function Home (){
                     allVideogames={allVideogames.length}
                   />
                 </div>
+                <div> <Payment
+                      initialization={initialization}
+                      onSubmit={onSubmit}
+                      onReady={onReady}
+                      onError={onError}/> 
+                </div>
             </div>
-          )}
+          )}  
         </div>
       );
       
