@@ -33,7 +33,7 @@ export default function Home() {
 
   const createPreference = async () =>{
     try {
-      const response = await axios.post("http://localhost:8080/create_preference",{
+      const response = await axios.post("http://localhost:3001/pay/create_preference",{
         description: "Bananita contenta",
         price: 100,
         quantity: 1,
