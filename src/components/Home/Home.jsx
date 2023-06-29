@@ -38,6 +38,7 @@ export default function Home() {
 
     window.addEventListener("popstate", handleLocationChange);
 
+    
     return () => {
       dispatch(setCurrentPage(1));
       dispatch(setOrigin("all"));
