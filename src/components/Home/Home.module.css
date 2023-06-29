@@ -83,12 +83,13 @@
   }
 
 .filter-container {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    /* display: grid;
+    grid-template-columns: 1fr auto 1fr; */
     grid-gap: 10px;
     align-items: center;
     margin: 20px;
     margin-bottom: 40px;
+    display: inline-flex;
 }
 
 .filter-container select {
