@@ -12,7 +12,7 @@ export default function LandingPage() {
         style={{ backgroundImage: `url("https://cutt.ly/Xwewj6kG")` }}
       ></div>
       <div className={styles.content}>
-        <h1 className={styles.title}>Welcome to my Videogames Henry PI</h1>
+        <h1 className={styles.title}>Epic Games Shop</h1>
         <Link to="/home">
           <button className={styles.button}>Home</button>
         </Link>
