@@ -19,53 +19,52 @@ import NavBar from "../NavBar/NavBar.jsx";
 
 //////////////
 
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import axios from "axios"
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import axios from "axios";
 
 /////////////
 
 export default function Home() {
-
   /////////////////////////////
   //estado preferenceId
-  const [preferenceId, setPreferenceId] = useState(null)
-  initMercadoPago('TEST-ba7e0c4b-3acf-42aa-8d43-f00632b88f1d');
+  const [preferenceId, setPreferenceId] = useState(null);
+  initMercadoPago("TEST-ba7e0c4b-3acf-42aa-8d43-f00632b88f1d");
 
-  const createPreference = async () =>{
+  const createPreference = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/pay/create_preference",{
-        description: "Bananita contenta",
-        price: 100,
-        quantity: 1,
-        // currency_id:"ARS"
-      })
-      const { id } = response.data
-      return id
+      const response = await axios.post(
+        "http://localhost:3001/pay/create_preference",
+        {
+          description: "Bananita contenta",
+          price: 100,
+          quantity: 1,
+          // currency_id:"ARS"
+        }
+      );
+      const { id } = response.data;
+      return id;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const handleBuy = async () => {
-    const id = await createPreference()
-    if(id){
-      setPreferenceId(id)
+    const id = await createPreference();
+    if (id) {
+      setPreferenceId(id);
     }
-  }
-/////////////////////////////
+  };
+  /////////////////////////////
 
   //estado del carrito
-  const [currentCart, setCurrentCart] = useState([])
+  const [currentCart, setCurrentCart] = useState([]);
 
-
-  function handleClickCart(item){
+  function handleClickCart(item) {
     let isPresent = false;
-    currentCart.forEach(product => {
-      if(item.id === product.id)
-        isPresent = true;
+    currentCart.forEach((product) => {
+      if (item.id === product.id) isPresent = true;
     });
-    if(isPresent)
-    return;
+    if (isPresent) return;
     setCurrentCart([...currentCart, item]);
   }
 
@@ -228,7 +227,9 @@ export default function Home() {
             {/* ////////////////// */}
 
             <button onClick={handleBuy}>MERCADO PAGO</button>
-            {preferenceId &&  <Wallet initialization={{ preferenceId: preferenceId }} />}
+            {preferenceId && (
+              <Wallet initialization={{ preferenceId: preferenceId }} />
+            )}
 
             {/* ////////////////// */}
 
@@ -252,7 +253,7 @@ export default function Home() {
                     // genres={el.genres}
                     price={el.price}
                     image={el.background_image || el.image}
-                    id={el.apiId}
+                    id={el.id}
                     key={el.id}
                   />
                 ))}
