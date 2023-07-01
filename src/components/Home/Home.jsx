@@ -29,7 +29,7 @@ export default function Home() {
   /////////////////////////////
   //estado preferenceId
   const [preferenceId, setPreferenceId] = useState(null)
-  initMercadoPago('TEST-1766e980-54b4-4356-b991-14078e6d78ef');
+  initMercadoPago('TEST-ba7e0c4b-3acf-42aa-8d43-f00632b88f1d');
 
   const createPreference = async () =>{
     try {
