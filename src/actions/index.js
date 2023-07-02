@@ -99,3 +99,9 @@ export function setOrigin(payload){
         payload
     };
 };
+export function getDataUser(payload){
+    return{
+        type:"GETDATAUSER",
+        payload,
+    }
+}
