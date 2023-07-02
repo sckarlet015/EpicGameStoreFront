@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import './RegistrationForm.css';
 import axios from 'axios';
-import { getDataUser } from '../../actions';
+
 
 const RegistrationForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const dispatch = useDispatch();
-
+    const history = useHistory();
     const handleSubmit = async (event) => {
         event.preventDefault();
         const newUserPost = {
@@ -21,14 +19,8 @@ const RegistrationForm = () => {
         try {
           const response = await axios.post('http://localhost:3001/users', newUserPost);
           const {newCart, newUser} = response.data
-          const dataUser = {
-            nombre: newUser.userName,
-            userID: newUser.id,
-            cartID: newCart.id
-          }
-          const dataUserDispatch = dispatch(getDataUser(dataUser))
-          console.log(dataUserDispatch);
-
+        alert("Usuario creado con exito")
+          history.push("/login");
         } catch (error) {
           console.log(error);
         }

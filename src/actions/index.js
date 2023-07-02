@@ -100,6 +100,7 @@ export function setOrigin(payload){
     };
 };
 export function getDataUser(payload){
+    
     return{
         type:"GETDATAUSER",
         payload,
