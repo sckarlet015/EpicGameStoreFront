@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 import noImage from "./noImageFound.jpg";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import Favorites from "../Favorites/Favorites";
 
 export default function Card({
   name,
@@ -13,7 +16,16 @@ export default function Card({
   handleClickCart,
   item,
 }) {
-  console.log(id);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const favorites = [];
+
+  const handleToggleFavorite = () => {
+    favorites.push({ image, name, price });
+    setIsFavorite(!isFavorite);
+    Favorites(favorites);
+  };
+
   let genreList = [];
 
   if (genres) {
@@ -29,6 +41,18 @@ export default function Card({
 
   return (
     <div className={styles.card}>
+      <button
+        className={`${styles.favoriteButton} ${
+          isFavorite ? styles.favorite : ""
+        }`}
+        onClick={handleToggleFavorite}
+      >
+        {isFavorite ? (
+          <FavoriteIcon className={styles.favoriteIcon} />
+        ) : (
+          <FavoriteBorderIcon className={styles.favoriteIcon} />
+        )}
+      </button>
       <Link
         to={id === -5 ? "/videogame" : id === -6 ? "#" : `/home/${id}`}
         key={id}
@@ -39,14 +63,6 @@ export default function Card({
           alt="image not found"
         />
         <h3 className={styles.cardTitle}>{name}</h3>
-        {/* <div className={styles.cardGenres}>
-          {!(id === -5 || id === -6) && <h4>Genres: </h4>}
-          <ul>
-            {genreList.map((genre) => (
-              <li key={genre.id}>{genre.name}</li>
-            ))}
-          </ul>
-        </div> */}
         <h3 className={styles.cardTitle}>Price: U$S {price}</h3>
       </Link>
       <button onClick={() => handleClickCart(item)}>Add to cart</button>
