@@ -175,13 +175,8 @@ export default function Home() {
         <LoadingPage />
       ) : (
         <div className={styles.container}>
-          <div className={styles.header}>
-            <h1 className={styles.heading}>Epic Games Shop</h1>
-
+          <div>
             <NavBar size={currentCart.length} />
-            {/* <Link to="/videogame" className={styles.button}>
-              Create Videogame 
-            </Link> */}
           </div>
           <div className={styles["filter-container"]}>
             <div>
