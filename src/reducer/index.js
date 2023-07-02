@@ -2,6 +2,7 @@ import { filterByOrigin } from "./filterByOrigin.js";
 
 const initialState = {
   videogames: [],
+  dataUser: [],
   allVideogames: [],
   genres: [],
   platforms: [],
@@ -101,6 +102,12 @@ const reducer = (state = initialState, action) => {
           return 0; // No sorting required
         }
       });
+
+      case "GETDATAUSER": 
+      return{
+        ...state,
+        dataUser: action.payload
+      }
   
       return {
         ...state,

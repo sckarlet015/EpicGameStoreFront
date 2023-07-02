@@ -25,6 +25,9 @@ import axios from "axios";
 /////////////
 
 export default function Home() {
+
+  const DataUser = useSelector(state => state)
+  console.log(DataUser);
   /////////////////////////////
   //estado preferenceId
   const [preferenceId, setPreferenceId] = useState(null);
@@ -72,6 +75,7 @@ export default function Home() {
 
   const dispatch = useDispatch();
   const location = useLocation();
+  const state = useSelector(state=>state)
   const allVideogames = useSelector((state) => state.videogames);
   console.log(allVideogames);
   const pageNumber = useSelector((state) => state.currentPage);
@@ -178,6 +182,7 @@ export default function Home() {
           <div>
             <NavBar size={currentCart.length} />
           </div>
+          <h3>Hola {state.dataUser.nombre.toUpperCase()}</h3>
           <div className={styles["filter-container"]}>
             <div>
               <label className={styles.label}>Rating: </label>

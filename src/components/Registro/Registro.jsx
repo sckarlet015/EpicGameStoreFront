@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
-import NavBar from '../NavBar/NavBar';
+import { useHistory } from "react-router-dom";
 import './RegistrationForm.css';
 import axios from 'axios';
+
 
 const RegistrationForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const history = useHistory();
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const newUser = {
-          userName: name,
-          userPassword: password,
-          userEmail: email, 
+        const newUserPost = {
+            userName: name,
+            userPassword: password,
+            userEmail: email, 
         };
         try {
-          const response = await axios.post('http://localhost:3001/users', JSON.stringify(newUser));
-          console.log(response.data);
+          const response = await axios.post('http://localhost:3001/users', newUserPost);
+          const {newCart, newUser} = response.data
+        alert("Usuario creado con exito")
+          history.push("/login");
         } catch (error) {
           console.log(error);
         }
-        console.log(name, email, password);
       };      
 
     return (
