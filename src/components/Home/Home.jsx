@@ -6,6 +6,7 @@ import {
   filterVideogamesByOrigin,
   setCurrentPage,
   setOrigin,
+  getDataUser
 } from "../../actions/index.js";
 import { Link, useLocation } from "react-router-dom";
 import Card from "../Card/Card.jsx";
@@ -16,56 +17,32 @@ import styles from "./Home.module.css";
 import noGameFif from "./noGame.gif";
 import noGameSearh from "./noGameSearch.gif";
 import NavBar from "../NavBar/NavBar.jsx";
-
-
-import Registro from '../Registro/Registro.jsx'
-
-//////////////
-
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
-
-/////////////
 
 export default function Home() {
 
-  const DataUser = useSelector(state => state)
+  const DataUser = useSelector(state => state.dataUser)
+  const [localUserData, setLocalUserData] = useState(DataUser)
+  useEffect(() => {
+    setLocalUserData(DataUser)
+
+  },[DataUser])
   console.log(DataUser);
-  /////////////////////////////
-  //estado preferenceId
-  const [preferenceId, setPreferenceId] = useState(null);
-  initMercadoPago("TEST-ba7e0c4b-3acf-42aa-8d43-f00632b88f1d");
-
-  const createPreference = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/pay/create_preference",
-        {
-          description: "Bananita contenta",
-          price: 100,
-          quantity: 1,
-          // currency_id:"ARS"
-        }
-      );
-      const { id } = response.data;
-      return id;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleBuy = async () => {
-    const id = await createPreference();
-    if (id) {
-      setPreferenceId(id);
-    }
-  };
-  /////////////////////////////
 
   //estado del carrito
   const [currentCart, setCurrentCart] = useState([]);
+  const idUser =  localUserData.userID
 
-  function handleClickCart(item) {
+
+  async function handleClickCart(item) {
+    const idS = {
+      gameID: item.id,
+      userId: idUser
+    }
+    console.log(idS);
+    const postCatr = await axios.post('http://localhost:3001/cart',idS)
+    console.log(postCatr);
+
     let isPresent = false;
     currentCart.forEach((product) => {
       if (item.id === product.id) isPresent = true;
@@ -92,10 +69,15 @@ export default function Home() {
   useEffect(() => {
     dispatch(getVideogames());
 
+    const userDataLocal = localStorage.getItem('userData')
+    if (!localUserData) {
+      // dispatch(getDataUser(userDataLocal))
+    }
+    console.log(localUserData);
+
     const handleLocationChange = () => {
       dispatch(setCurrentPage(1));
     };
-
     window.addEventListener("popstate", handleLocationChange);
 
     return () => {
@@ -185,7 +167,7 @@ export default function Home() {
           <div>
             <NavBar size={currentCart.length} />
           </div>
-          <h3>Hola {state.dataUser.nombre}</h3>
+          <h3>Hola {localUserData.nombre}</h3>
           <div className={styles["filter-container"]}>
             <div>
               <label className={styles.label}>Rating: </label>
@@ -226,16 +208,6 @@ export default function Home() {
           </div>
           <div>
             <SearchBar />
-
-            {/* ////////////////// */}
-
-            <button onClick={handleBuy}>MERCADO PAGO</button>
-            {preferenceId && (
-              <Wallet initialization={{ preferenceId: preferenceId }} />
-            )}
-
-            {/* ////////////////// */}
-
             <button onClick={(e) => handleClick(e)} className={styles.button}>
               Reload videogames
             </button>

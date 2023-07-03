@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
 
     case "GET_DETAIL":
       return{
-        state,
+        ...state,
         detail: action.payload
       };
   
@@ -109,15 +109,9 @@ const reducer = (state = initialState, action) => {
         dataUser: action.payload
       }
   
-      return {
-        ...state,
-        videogames: sortedByAlphabet
-      };
-  
     default:
       return state;
   };
 };
   
 export default reducer;
-  

@@ -26,6 +26,7 @@ const Login = () => {
                 cartID: Carrito.id
             }
             const resDataUsuer = dispatch(getDataUser(dataUser))
+            localStorage.setItem('userData', JSON.stringify(dataUser));
             history.push("/home");
         } catch (error) {
             console.log(error)

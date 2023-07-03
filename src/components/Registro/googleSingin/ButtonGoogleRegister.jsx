@@ -27,7 +27,7 @@ const Login = () => {
                         // userProvider: data.user.providerId,
                         // userUid: data.user.uid
                 }) 
-                    axios.post('http://localhost:3001/users', value) 
+                    await axios.post('http://localhost:3001/users', value) 
                     history.push("/Login");
             } 
          }       
