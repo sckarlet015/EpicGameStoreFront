@@ -9,7 +9,7 @@ import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 const MercadoPago = (props) => {
 
     const [preferenceId, setPreferenceId] = useState(null);
-    initMercadoPago("TEST-4bcd69e1-12ca-43ef-b6c3-9b27fc8f00fd");
+    initMercadoPago("TEST-5e60fd10-e5a5-4835-94bc-c61f40cc8cb4");
     
     const arrayGames = props.arrayGames
     const cardID = useSelector(state => state.dataUser.cardID);
