@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export function getVideogames() {
-    return async function (dispatch) {
-        const json = await axios.get("/videogames");
+export function getVideogames (){
+    return async function(dispatch){
+        const json = await axios.get("/videogames"); 
         return dispatch({
             type: "GET_VIDEOGAMES",
             payload: json.data
@@ -10,8 +10,8 @@ export function getVideogames() {
     };
 };
 
-export function getVideogamesByName(payload) {
-    return async function (dispatch) {
+export function getVideogamesByName (payload){
+    return async function(dispatch){
         try {
             const json = await axios.get(`/videogames?name=${payload}`);
             return dispatch({
@@ -24,8 +24,8 @@ export function getVideogamesByName(payload) {
     };
 };
 
-export function getGenres() {
-    return async function (dispatch) {
+export function getGenres(){
+    return async function(dispatch){
         const json = await axios.get(`/genres`);
         return dispatch({
             type: "GET_GENRES",
@@ -34,8 +34,8 @@ export function getGenres() {
     };
 };
 
-export function getPlatforms() {
-    return async function (dispatch) {
+export function getPlatforms(){
+    return async function(dispatch){
         const json = await axios.get(`/platforms`);
         return dispatch({
             type: "GET_PLATFORMS",
@@ -44,8 +44,8 @@ export function getPlatforms() {
     };
 };
 
-export function getDetail(payload) {
-    return async function (dispatch) {
+export function getDetail(payload){
+    return async function(dispatch){
         try {
             const json = await axios.get(`/videogames/${payload}`)
             return dispatch({
@@ -54,57 +54,55 @@ export function getDetail(payload) {
             });
         } catch (error) {
             console.log(error);
-        }
+        }   
     };
 };
 
-export function postVideogame(payload) {
-    return async function (dispatch) {
+export function postVideogame(payload){
+    return async function(dispatch){
         const response = await axios.post(`/videogames`, payload);
         return response
     }
 };
 
-export function filterVideogamesByOrigin(payload) {
-    return {
+export function filterVideogamesByOrigin (payload){
+    return{
         type: "FILTER_BY_ORIGIN",
         payload
     };
 };
 
-export function sortByRating(payload) {
-    return {
+export function sortByRating (payload){
+    return{
         type: "SORT_BY_RATING",
         payload
     };
 };
 
-export function sortByAlphabet(payload) {
-    return {
+export function sortByAlphabet (payload){
+    return{
         type: "SORT_BY_ALPHABET",
         payload
     };
 };
 
-export function setCurrentPage(payload) {
+export function setCurrentPage(payload){
     return {
-        type: "SET_CURRENT_PAGE",
-        payload
+      type: "SET_CURRENT_PAGE",
+      payload
     };
-};
+  };
 
-export function setOrigin(payload) {
+export function setOrigin(payload){
     return {
         type: "SET_ORIGIN",
         payload
     };
 };
-export function getDataUser() {
-    return async function (dispatch) {
-        const response = await axios.get(`/users`)
-        return dispatch({
-                type: "GETDATAUSER",
-                payload: response.data,
-        })
+export function getDataUser(payload){
+    
+    return{
+        type:"GETDATAUSER",
+        payload,
     }
 }

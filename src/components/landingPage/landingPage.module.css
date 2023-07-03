@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&family=Ubuntu&display=swap');
+
+:root {
+    --gunmetal: #2D3A44ff;
+    --tiffany-blue: #74D3CFff;
+    --non-photo-blue: #93E4EFff;
+    --taupe-gray: #87878Cff;
+    --moonstone: #76ADBEff;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+
+.container {
+    position: relative;
+    text-align: center;
+    height: 100vh; /* Set the container height to 100% of the viewport height */
+  }
+  
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://cutt.ly/Xwewj6kG");
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.3;
+    z-index: -1;
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+  
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  
+  
+  .title {
+    color: var(--tiffany-blue);
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 40px; 
+    font-weight: bold;
+    margin-bottom: 20px;
+    -webkit-text-stroke: 0.25px var(--gunmetal);
+    -webkit-text-fill-color: var(--tiffany-blue);
+  }
+  
+  .button {
+    background-color: var(--gunmetal);
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--moonstone);
+    padding: 12px 24px; 
+    font-size: 20px; 
+    border: none;
+    border-radius: 8px; 
+    cursor: pointer;
+  }
+  
+
+  
+  .title,
+  .button {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.title,
+.button {
+  animation: slideIn 1s ease-in-out;
+}
