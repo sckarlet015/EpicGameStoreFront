@@ -84,7 +84,7 @@ const Cart = () => {
         <span>{price.toFixed(2)}</span>
       </div>
       <div>
-        <MercadoPago />
+        <MercadoPago arrayGames= {cart}/>
       </div>
     </div>
   );

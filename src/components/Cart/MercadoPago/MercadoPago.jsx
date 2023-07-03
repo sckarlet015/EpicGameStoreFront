@@ -1,34 +1,31 @@
 import React from 'react'
 import axios from 'axios'
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 //rafce
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
-const MercadoPago = () => {
+const MercadoPago = (props) => {
 
     const [preferenceId, setPreferenceId] = useState(null);
     initMercadoPago("TEST-4bcd69e1-12ca-43ef-b6c3-9b27fc8f00fd");
-  
+    
+    const arrayGames = props.arrayGames
+    const cardID = useSelector(state => state.dataUser.cardID);
+    const userId = useSelector(state => state.dataUser.userID);
+    
     const createPreference = async () => {
       try {
-        const arrayItems = 
-          [{
-            description: "Bananita contenta",
-            price: 100,
-            quantity: 1,
-            // currency_id:"ARS"
-          },
-          {
-            description: "Bananita contenta2",
-            price: 100,
-            quantity: 1,
-            // currency_id:"ARS"
-          }]
       
+      const order = { 
+        cardID,
+        userId,
+        Videogames: arrayGames
+      }
         const response = await axios.post(
           "http://localhost:3001/pay/create_preference",
-          arrayItems
+          order
         );
         const { id } = response.data;
         return id;
@@ -48,6 +45,7 @@ const MercadoPago = () => {
     <div>
      <button onClick={handleBuy}>MERCADO PAGO</button>
             {preferenceId && (
+              console.log(preferenceId),
               <Wallet initialization={{ preferenceId: preferenceId }} />
             )} 
     </div>
