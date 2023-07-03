@@ -34,7 +34,7 @@ const Cart = () => {
       <div>
         <NavBar />
       </div>
-      {cart.length > 0 ? (
+      {cart?.length > 0 ? (
         cart.map((item) => (
           <div key={item.id} className={style.cart_box}>
             <div className={style.cart_img}>
@@ -53,7 +53,7 @@ const Cart = () => {
       ) : (
         <div className={style.emptyCart}>
           <p>Aún no hay juegos en tu carrito</p>
-          <button onClick={() => history.push("/")}>Ir al Home</button>
+          <button onClick={() => history.push("/home")}>Ir al Home</button>
         </div>
       )}
       <div className={style.total}>
