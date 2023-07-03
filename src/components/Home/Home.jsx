@@ -177,7 +177,7 @@ const arrayItem = {}
           <div>
             <NavBar size={currentCart.length} />
           </div>
-          <h3>Hola {state.dataUser.nombre.toUpperCase()}</h3>
+          <h3>Hola {state.dataUser?.nombre?.toUpperCase()}</h3>
           <div className={styles["filter-container"]}>
             <div>
               <label className={styles.label}>Rating: </label>
