@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import styles from './RegistrationForm.module.css';
 import axios from 'axios';
-import { getDataUser } from '../../actions';   
-///
- import Login from './googleSingin/Login'  
+import ButtonGoogleRegister from './googleSingin/ButtonGoogleRegister'
+
 
 const RegistrationForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const dispatch = useDispatch();
-
+    const history = useHistory();
     const handleSubmit = async (event) => {
         event.preventDefault();
         const newUserPost = {
@@ -22,43 +19,13 @@ const RegistrationForm = () => {
         };
         try {
           const response = await axios.post('http://localhost:3001/users', newUserPost);
-        //   const {newCart, newUser} = response.data
-        //   const dataUser = {
-        //     nombre: newUser.userName,
-        //     userID: newUser.id,
-        //     cartID: newCart.id
-        //   }
-        //   const dataUserDispatch = dispatch(getDataUser(dataUser))
-        //   console.log(dataUserDispatch);
-
+          const {newCart, newUser} = response.data
+        alert("Usuario creado con exito")
+          history.push("/login");
         } catch (error) {
           console.log(error);
         }
       };
-
-/////////////////   
-
-    const handleRegisterByGoogle = async() => {
-    
-
-
-    const response = await axios.get('http://localhost:3001/users')
-    const arrayUsers = response.data;
-
-    const result = arrayUsers.find( user => user.userEmail === 'fmontoya3@soyhenry.com')
-    if(result){
-        console.log('el usuario existe')
-    }else{
-        const obj = {
-            userName: 'stateName',
-            userPassword: 'statePassword',
-            userEmail: 'stateEmail', 
-        }
-        await axios.post('http://localhost:3001/users', obj)
-    }
-
-    }
-/////////////////       
 
     return (
         <div>
@@ -97,7 +64,7 @@ const RegistrationForm = () => {
                     </div>
                     <button className={styles.buttonForm}>Registrarse</button>
                 </form>
-                <Login className={styles.buttonGoogle}></Login>
+                <ButtonGoogleRegister className={styles.buttonGoogle}></ButtonGoogleRegister>
                 {/* <button className={styles.buttonGoogle} onClick={handleRegisterByGoogle} >Registrarse con Google</button> */}
             </div>
         </div>

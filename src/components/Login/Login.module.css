@@ -1,4 +1,4 @@
-.login-form {
+.loginForm {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
@@ -6,29 +6,29 @@
     border-radius: 5px;
   }
   
-  .login-form h2 {
+  .loginFormH2{
     text-align: center;
     margin-bottom: 20px;
   }
   
-  .login-form form {
+  .loginFormForm {
     display: flex;
     flex-direction: column;
   }
   
-  .login-form label {
+  .loginFormLabel {
     font-weight: bold;
     margin-bottom: 10px;
   }
   
-  .login-form input {
+  .loginFormInput {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 3px;
   }
   
-  .login-form button {
+  .loginForm button {
     padding: 10px 20px;
     background-color: #4caf50;
     color: white;
@@ -37,7 +37,19 @@
     cursor: pointer;
   }
   
-  .login-form button:hover {
+  .loginForm button:hover {
     background-color: #45a049;
   }
   
+  .buttonGoogle{
+    width: 100%;
+    height: 10%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #0077ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }  
+    
