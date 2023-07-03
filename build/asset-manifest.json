@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.873fceaf.css",
+    "main.js": "/static/js/main.5cac4801.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/noGame.gif": "/static/media/noGame.fd482228d0cd9cb82758.gif",
+    "static/media/noGameSearch.gif": "/static/media/noGameSearch.c842817f6a48444a44f9.gif",
+    "static/media/loading.gif": "/static/media/loading.6685756b17ac824424de.gif",
+    "static/media/react.jpg": "/static/media/react.4604254bca9dec726635.jpg",
+    "static/media/express.png": "/static/media/express.304b141b6c72993d3aad.png",
+    "static/media/postgresql.png": "/static/media/postgresql.9ee65682ead971de3f0b.png",
+    "static/media/sequalize.png": "/static/media/sequalize.214c1054f729cde1f653.png",
+    "static/media/node.png": "/static/media/node.f278e586604eaefdbc21.png",
+    "static/media/noImageFound.jpg": "/static/media/noImageFound.fe8b8cd8275447e5ce04.jpg",
+    "index.html": "/index.html",
+    "main.873fceaf.css.map": "/static/css/main.873fceaf.css.map",
+    "main.5cac4801.js.map": "/static/js/main.5cac4801.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.873fceaf.css",
+    "static/js/main.5cac4801.js"
+  ]
+}

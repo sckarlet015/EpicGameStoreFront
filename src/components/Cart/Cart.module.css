@@ -1,0 +1,26 @@
+.image{
+    display: flex;
+    width: 400px;
+}
+
+.cart_box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    padding-bottom: 1px;
+}
+.total{
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.cart_box img{
+    width: 400px;
+    height: 250px;
+}
