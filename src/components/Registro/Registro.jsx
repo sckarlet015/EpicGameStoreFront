@@ -18,7 +18,7 @@ const RegistrationForm = () => {
             userEmail: email, 
         };
         try {
-          const response = await axios.post('http://localhost:3001/users', newUserPost);
+          const response = await axios.post('http://localhost:3001/users/', newUserPost);
           const {newCart, newUser} = response.data
         alert("Usuario creado con exito")
           history.push("/login");
