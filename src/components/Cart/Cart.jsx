@@ -11,10 +11,25 @@ const Cart = () => {
   const [price, setPrice] = useState(0);
   const [cart, setCart] = useState([]);
   const history = useHistory();
+
   const handleDataCart = async () => {
     const cartID = dataUser.cartID;
     const response = await axios.get(`http://localhost:3001/cart/${cartID}`);
     setCart(response.data[0]?.Videogames);
+  };
+
+  const deleteGame = async (gameId) => {
+    try {
+      const cartIdLocal = dataUser.cartID;
+      const data = {
+        gameID: gameId,
+        cartID: cartIdLocal
+      };
+      const response = await axios.post(`http://localhost:3001/cart/delete`, data);
+      setCart(response.data[0]?.Videogames);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // useEffect(() => {
@@ -54,7 +69,7 @@ const Cart = () => {
             </div>
             <div>
               <span>{item.unit_price}</span>
-              <button>Remove</button>
+              <button onClick={() => deleteGame(item.id)}>Remove</button>
             </div>
           </div>
         ))
