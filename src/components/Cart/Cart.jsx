@@ -17,16 +17,24 @@ const Cart = () => {
     setCart(response.data[0]?.Videogames);
   };
 
+  // useEffect(() => {
+  //   handleDataCart();
+  //   handlePrice();
+  // }, []);
+
   useEffect(() => {
     handleDataCart();
-    handlePrice();
   }, []);
 
+  useEffect(() => {
+    handlePrice();
+  }, [cart]);
+
   const handlePrice = () => {
-    const total = cart.reduce((accumulator, item) => {
-      return accumulator + item.quantity * item.price;
+      const total = cart.reduce((accumulator, item) => {
+      return accumulator + item.quantity * item.unit_price;
     }, 0);
-    setPrice(total);
+    setPrice(total); 
   };
 
   return (
@@ -58,7 +66,7 @@ const Cart = () => {
       )}
       <div className={style.total}>
         <span>Total Price of your Cart</span>
-        <span>{price}</span>
+        <span>{price.toFixed(2)}</span>
       </div>
       <div>
         <MercadoPago />

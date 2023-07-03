@@ -6,6 +6,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Favorites from "../Favorites/Favorites";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Card({
@@ -21,6 +22,7 @@ export default function Card({
   const [isFavorite, setIsFavorite] = useState(false);
   const userIdLocal = useSelector(state => state.dataUser.userID);
 
+  const history = useHistory();
 
   const favorites = [];
 
@@ -42,15 +44,20 @@ export default function Card({
   }
 
   const addCarrito = async (gameId) => {
-    try {
-      const data = {
-        gameID: gameId,
-        userId: userIdLocal
+    if (!userIdLocal) {
+     history.push("/register") 
+    }else{
+      try {
+        const data = {
+          gameID: gameId,
+          userId: userIdLocal
+        };
+        await axios.post(`http://localhost:3001/cart`, data);
+        handleClickCart(item);
+      } catch (error) {
+        console.log(error);
       };
-      await axios.post(`http://localhost:3001/cart`, data);
-    } catch (error) {
-      console.log(error);
-    }
+    };
   };
 
   return (
