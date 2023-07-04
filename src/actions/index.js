@@ -10,6 +10,16 @@ export function getVideogames (){
     };
 };
 
+export function getCartUser (id){
+    return async function(dispatch){
+        const json = await axios.get(`/cart/${id}`); 
+        return dispatch({
+            type: "GET_CART_USER",
+            payload: json.data[0]?.Videogames
+        });
+    };
+};
+
 export function getVideogamesByName (payload){
     return async function(dispatch){
         try {

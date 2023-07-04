@@ -1,49 +1,44 @@
-@import url("https://fonts.googleapis.com/css2?family=Monomaniac+One&family=Ubuntu&display=swap");
-
+/* @import url("https://fonts.googleapis.com/css2?family=Monomaniac+One&family=Ubuntu&display=swap"); */
+:root {
+  --primero-color: #2c3e50;
+  --segundo-color: #c0392b;
+  --tercero-color: #555555;
+  --fondo-color: #f5f5f5;
+  --texto-color: #ffffff;
+}
 .searchBarContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 }
 
-.searchBar {
+.inputContainer {
   display: flex;
   align-items: center;
-  gap: 10px;
+  position: relative;
 }
 
 .input {
-  padding: 8px;
-  border: none;
-  background-color: var(--melon);
-  color: var(--gunmetal);
-  font-size: 16px;
-  border-radius: 4px;
-  outline: none;
-  transition: background-color 0.3s ease;
-  height: 32px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.input::placeholder {
-  color: var(--gunmetal);
+  padding-right: 40px; /* Espacio para el botón */
 }
 
 .searchButton {
-  display: inline-block;
-  padding: 6px 12px;
-  background-color: var(--melon);
-  color: var(--gunmetal);
-  text-decoration: none;
-  font-size: 14px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  margin-bottom: 10px;
+  padding: 1px 10px;
+  background-color: transparent;
   border: none;
+  cursor: pointer;
+  color: var(--segundo-color);
+}
+.searchButton:hover{
+  color:var(--fondo-color);
+  background-color: var(--segundo-color);
   border-radius: 5px;
-  transition: background-color 0.3s ease;
-  margin: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.searchButton:hover {
-  background-color: var(--gunmetal);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.arrow {
+  font-size: 20px;
 }

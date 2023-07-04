@@ -82,7 +82,7 @@
     border: 1px solid var(--gunmetal);
   }
   
-  button[type="submit"],
+  /* button[type="submit"],
   button {
     padding: 10px 20px;
     border-radius: 5px;
@@ -97,7 +97,7 @@
   button:hover {
     background-color: var(--gunmetal);
     color: var(--salmon);
-  }
+  } */
   
   ul {
     list-style: none;

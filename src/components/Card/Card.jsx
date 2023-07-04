@@ -8,6 +8,10 @@ import Favorites from "../Favorites/Favorites";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaStar } from 'react-icons/fa';
+import { useDispatch } from "react-redux";
+import { getCartUser } from "../../actions";
+
 
 export default function Card({
   name,
@@ -16,6 +20,7 @@ export default function Card({
   Genres,
   image,
   id,
+  rating,
   handleClickCart,
   item,
 }) {
@@ -23,25 +28,25 @@ export default function Card({
   const userIdLocal = useSelector(state => state.dataUser.userID);
 
   const history = useHistory();
+  /////
+  const dispatch = useDispatch()
+  const user = useSelector(state=>state.dataUser.cartID)
+  /////////
 
   const favorites = [];
-
+  const roundedRating = Math.round(rating);
+  const stars = Array.from({ length: 5 }, (_, index) => {
+    if (index < roundedRating) {
+      return <FaStar key={index} className={styles.starFilled} />;
+    } else {
+      return <FaStar key={index} className={styles.starEmpty} />;
+    }
+  });
   const handleToggleFavorite = () => {
     favorites.push({ image, name, price });
     setIsFavorite(!isFavorite);
     Favorites(favorites);
   };
-
-  let genreList = [];
-
-  if (genres) {
-    genreList = genres;
-  } else if (Genres) {
-    genreList = Genres.map((genre) => ({
-      id: "",
-      name: genre.name,
-    }));
-  }
 
   const addCarrito = async (gameId) => {
     if (!userIdLocal) {
@@ -54,14 +59,18 @@ export default function Card({
         };
         await axios.post(`http://localhost:3001/cart`, data);
         handleClickCart(item);
+        dispatch(getCartUser(user))
       } catch (error) {
         console.log(error);
       };
     };
+
   };
 
   return (
-    <div className={styles.card}>
+    <div className={styles.container}>
+      <div className={styles.card}>
+      <div className={styles.rating}>{stars}</div>
       <button
         className={`${styles.favoriteButton} ${
           isFavorite ? styles.favorite : ""
@@ -78,15 +87,18 @@ export default function Card({
         to={id === -5 ? "/videogame" : id === -6 ? "#" : `/home/${id}`}
         key={id}
       >
+        <div className={styles.imageContainer}>
         <img
           className={styles.image}
           src={image || noImage}
           alt="image not found"
         />
+         </div>
         <h3 className={styles.cardTitle}>{name}</h3>
         <h3 className={styles.cardTitle}>Price: U$S {price}</h3>
       </Link>
-      <button onClick={() => addCarrito(id)}>Add to cart</button>
+      <button className={styles.buton} onClick={() => addCarrito(id)}>Add to cart</button>
+    </div>
     </div>
   );
 }

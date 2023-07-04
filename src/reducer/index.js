@@ -1,6 +1,7 @@
 import { filterByOrigin } from "./filterByOrigin.js";
 
 const initialState = {
+  cartUser: [],
   videogames: [],
   dataUser: [],
   allVideogames: [],
@@ -19,6 +20,11 @@ const reducer = (state = initialState, action) => {
         videogames: action.payload,
         allVideogames: action.payload // Update the allVideogames property with the initial videogames array
       };
+      case "GET_CART_USER":
+        return {
+          ...state,
+          cartUser: action.payload,
+        };
 
     case "GET_VIDEOGAMES_NAME":
       return{
