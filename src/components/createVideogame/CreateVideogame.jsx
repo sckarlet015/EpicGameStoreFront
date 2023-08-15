@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { postVideogame, getGenres, getPlatforms } from "../../actions/index.js";
 import styles from "./createVideogame.module.css";
 import LoadingPage from "../loadingPage/LoadingPage.jsx";
+import axios from "axios";
 
 function isImage(url) {
   return /\.(jpg|jpeg|png)$/.test(url);
@@ -35,20 +36,23 @@ const validate = (input) => {
     errors.genreIds = "Please select at least one genre";
   } else if (!input.platforms || input.platforms.length === 0) {
     errors.platforms = "Please select at least one platform";
-  } else if (!input.image) {
-    errors.image = " please insert an image";
-  } else if (!isImage(input.image)) {
-    errors.image = " please insert an image";
-  }
+  } 
   return errors;
 };
 
 export default function CreateVideogame() {
+
+  const preset_key = "images";
+  const cloud_name = "drgco4gsh";
+  const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
+
   const dispatch = useDispatch();
   const history = useHistory();
   const platforms = useSelector((state) => state.platforms);
   const genres = useSelector((state) => state.genres);
   const [errors, setErrors] = useState({});
+  const [image, setImage] = useState(``);
+  const [loading, setLoading] = useState(false);
 
   const [input, setInput] = useState({
     name: "",
@@ -183,6 +187,27 @@ export default function CreateVideogame() {
     return <LoadingPage />;
   }
 
+  const upLoadImage = async (e) => {
+    const file = e.target.files[0];
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", preset_key);
+    setLoading(true);
+    try {
+      const response = await axios.post(cloudinaryUrl, data);
+      console.log(response);
+      setInput({
+        ...input,
+        image: response.data.secure_url,
+      });
+      setImage(response.data.secure_url);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
   return (
     <div>
       {genres.length === 0 || platforms.length === 0 ? (
@@ -241,15 +266,48 @@ export default function CreateVideogame() {
                 )}
               </div>
               <div>
-                <label>Image: </label>
-                <input
-                  type="url"
-                  value={input.image}
-                  name="image"
+                <label>Developer: </label>
+                <textarea
+                  value={input.developer}
+                  name="developer"
                   onChange={handleChange}
                 />
-                {errors.image && <p className={styles.error}>{errors.image}</p>}
               </div>
+              <div>
+                <label>Price: </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  min={0}
+                  value={input.price}
+                  name="price"
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label>Stock: </label>
+                <input
+                  type="number"
+                  min={0}
+                  value={input.stock}
+                  name="stock"
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+              <span>Picture</span>
+              <img
+                src={image}
+                alt="por favor sube una imagen"
+                placeholder="Videogame picture..."
+              />
+            </div>
+            <input
+              type="file"
+              name="file"
+              onChange={upLoadImage}
+              placeholder="N/A"
+            />
               <div>
                 <label>Genre: </label>
                 <select onChange={(e) => handleGenreSelect(e.target.value)}>

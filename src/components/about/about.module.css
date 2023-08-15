@@ -1,141 +1,155 @@
 :root {
-    --melon: #E9AA94ff;
-    --salmon: #DA8673ff;
-    --moonstone: #76ADBEff;
-    --rust: #AA5637ff;
-    --paynes-gray: #4B6979ff;
-    --gunmetal: #2D3A44ff;
+  --primero-color: #2c3e50;
+  --segundo-color: #ff283ad7;
+  --tercero-color: #0c0f2c;
+  --fondo-color: #f5f5f5;
+  --texto-color: #ffffff;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
-    background-color: var(--gunmetal);
-    color: var(--white);
-    padding: 20px;
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 2%;
-    width: 80%; /* Adjust the maximum width as needed */
-    background-color: var(--melon);
-    color: var(--gunmetal);
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  /* background-color: #b0f9da; */
+  display: block;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  color: white;
 }
 
-h1 {
-    font-size: 45px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.container h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: white;
 }
 
-
-
-.section {
-    overflow: hidden;
-    position: relative;
-    text-align: left;
-  }
-  
-  .section::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 1px; /* Adjust the height to your desired thickness */
-    background-color: var(--gunmetal);
-  }
-  
-  .section h2 {
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    text-align: left;
-  }
-  
-  
-  .section p {
-    transition: height 0.5s ease;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 5px;
-    text-align: left;
-  }
-  
-  .section p.show {
-    height: auto;
-    text-align: left;
-  }
-
-  .button {
-    align-self: center;
-    display: inline-block;
-    padding: 6px 12px; 
-    width: 200px;
-    background-color: var(--gunmetal);
-    color: var(--salmon);
-    text-decoration: none;
-    font-size: 14px; 
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    margin: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.container h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.button:hover {
-    background-color: var(--salmon);
-    color: var(--gunmetal);
+.iconTech {
+  display: inline-table;
+  justify-content: center;
+  grid-column: 1;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  grid-column: 1;
 }
 
-.technologiesContainer {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .technologyItem {
-    display: flex;
-    justify-content: center; /* Align items horizontally in the center */
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    width: 30%; /* Adjust the width as per your requirement */
-    padding: 10px;
-    margin-bottom: 30px;
-  }
-  
-  .technologyImage {
-    width: 200px; /* Adjust the width as per your requirement */
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .technologyName {
-    margin-top: 5px;
-    font-size: 25px;
-    text-align: center;
-    margin-bottom: 20px;
-    margin-top: 20px;
-  }
-  
-  .show p{
-    display: block;
-    height: 100%;
-  }
+.iconTech img {
+  width: 200px;
+  height: 100px;
+  margin: 0 10px;
+  border: 3px solid rgb(12, 12, 11);
+  border-radius: 15px;
+}
 
-  .contactImage {
-    width: 150px; /* Adjust the width as per your requirement */
-    height: auto;
-    border-radius: 30px;
-    margin: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.content {
+  display: flex;
+  margin-top: 30px;
+}
+
+.cardImg img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px rgba(1, 1, 1, 1);
+}
+
+.cardText img {
+  width: 80px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.cardText h2 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.cardText h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.links {
+  margin-top: 20px;
+}
+
+.links img {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.card {
+  position: relative;
+  height: 500px;
+  width: 350px;
+  display: inline-table;
+  padding: 20px;
+  background-color: rgb(137, 239, 137);
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px rgba(1, 1, 1, 1);
+  margin-right: 2rem;
+  margin-top: 2rem;
+}
+
+.cardContainer {
+  width: 300px;
+}
+
+@media (max-width: 400px) {
+  .container {
+    width: 410px;
   }
+}
+
+@media (min-width: 1250px) and (max-width: 1350) {
+  .container {
+    width: 1100px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1000px) {
+  .container {
+    width: 1020px;
+  }
+  .info {
+    width: 900px;
+    margin-left: 60px;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 890px) {
+  .container {
+    width: 930px;
+  }
+}
+
+@media (min-width: 550px) and (max-width: 700px) {
+  .container {
+    width: 915px;
+  }
+}
+
+@media (min-width: 350px) and (max-width: 550px) {
+  .container {
+    width: 920px;
+  }
+}
+
+@media (min-width: 230px) and (max-width: 350px) {
+  .container {
+    width: 920px;
+  }
+}
+@media (min-width: 150px) and (max-width: 230px) {
+  .container {
+    width: 890px;
+  }
+}

@@ -1,79 +1,190 @@
 :root {
-    --melon: #E9AA94ff;
-    --salmon: #DA8673ff;
-    --moonstone: #76ADBEff;
-    --rust: #AA5637ff;
-    --paynes-gray: #4B6979ff;
-    --gunmetal: #2D3A44ff;
+  --primero-color: #2c3e50;
+  --segundo-color: #c0392b;
+  --tercero-color: #555555;
+  --fondo-color: #f5f5f5;
+  --texto-color: #ffffff;
+}
+.detailContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.274);
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    min-height: 100vh;
-    background-color: var(--gunmetal);
+.detailTitle {
+  color: #77828d;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.title {
-    font-size: 25px;
-    color: var(--melon);
-    font-weight: bold;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.detailImage {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  margin-bottom: 20px;
 }
 
-.container img {
-    max-width: 80%;
-    border-radius: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+.detailDescription {
+  margin-bottom: 10px;
+  width: 100%;
+  height: 200px;
+  padding: 3px;
+  margin: 1px;
+  color: #77828d;
 }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    padding: 2%;
-    max-width: 80%; /* Adjust the maximum width as needed */
-    background-color: var(--melon);
-    color: var(--gunmetal); /* Update the text color */
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin-bottom: 50px;
-}
-  
-  
-  
-.description {
-    font-size: 24px;
-    color: var(--gunmetal);
-    padding: 10px;
-    border-radius: 5px;
-    text-align: justify; /* Align the text to the center */
+.detailInfo {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
-p {
-    font-size: 24px;
-    color: var(--gunmetal);
-}
-  
-.button {
-    display: inline-block;
-    padding: 6px 12px; 
-    background-color: var(--gunmetal);
-    color: var(--salmon);
-    text-decoration: none;
-    font-size: 14px; 
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    margin: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.detailInfoItem {
+  flex-basis: 50%;
+  margin-bottom: 10px;
+  color: #77828d;
 }
 
-.button:hover {
-    background-color: var(--salmon);
-    color: var(--gunmetal);
+.detailGenresHeading {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.detailGenresList {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.detailGenresItem {
+  margin-bottom: 5px;
+}
+
+.detailPlatformsHeading {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.detailPlatformsList {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.detailPlatformsItem {
+  margin-bottom: 5px;
+}
+
+.detailScreenshotsHeading {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.detailScreenshotsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.detailScreenshot {
+  width: 220px;
+  height: auto;
+  margin: 5px;
+}
+
+.contButtons {
+  display: flex;
+  margin-left: 20px;
+}
+
+.addButton {
+  display: block;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.favoriteButton {
+  display: block;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  margin-left: 2px;
+  background-color: #ff9800;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.contPrice {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.gamePrice {
+  margin: 0;
+  background-color: #2c3e50;
+  color: #ffffff;
+  font-size: 15px;
+  border-radius: 2px;
+  padding: 2px 5px;
+  margin-left: 5px;
+}
+
+.gameDivisa {
+  margin: 0;
+  background-color: #2c3e50;
+  color: #ffffff;
+  font-size: 15px;
+  border-radius: 2px;
+  padding: 2px 5px;
+}
+
+.gameDesc {
+  margin: 0;
+  background-color: #5ec52e;
+  color: #ffffff;
+  font-size: 15px;
+  border-radius: 2px;
+  padding: 2px 5px;
+  margin-left: 5px;
+}
+.rating {
+  margin: 10px 0;
+  margin-left: 20px;
+}
+.starFilled {
+  color: gold;
+}
+
+.starEmpty {
+  color: #ccc;
+}
+.genres {
+  margin: 10px 0;
+  margin-left: 20px;
+}
+
+.genreTag {
+  display: inline-block;
+  padding: 4px 8px;
+  margin-right: 5px;
+  background-color: #2c3e50;
+  color: #ffffff;
+  border-radius: 4px;
+}
+.buttonComment {
+  border-radius: 8px;
+}
+.buttonSend {
+  border-radius: 8px;
 }

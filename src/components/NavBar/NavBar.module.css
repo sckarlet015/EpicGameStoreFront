@@ -1,18 +1,16 @@
 :root {
   --primero-color: #2c3e50;
-  --segundo-color: #c0392b;
-  --tercero-color: #555555;
+  --segundo-color: #ff283ad7;
+  --tercero-color: #0c0f2c;
   --fondo-color: #f5f5f5;
   --texto-color: #ffffff;
 }
-.name{
-  color: var(--texto-color);
-}
+
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--tercero-color);
+  background-image: linear-gradient(to right, #8716c2, #11181d, #169ad3);
   padding: 10px;
 }
 .navLinks {
@@ -37,7 +35,9 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  margin-left: 10px;
+  margin-left: 20px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .navButtons {
@@ -45,19 +45,67 @@
   align-items: center;
 }
 
-.navButton {
-  background-color: var(--segundo-color);
-  color: var(--texto-color);
-  border: none;
-  padding: 8px 16px;
-  margin-left: 10px;
+.userIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+  font-size: 35px;
   font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  text-decoration: none;
+  color: black;
+  margin-right: 20px;
+}
+.userLink {
+  text-decoration: none;
+  padding-left: 1.5rem;
 }
 
-.navButton:hover {
-  background-color: var(--primero-color);
+.name {
+  color: var(--texto-color);
+  margin-right: 20px;
+}
+.nameContainer {
+  width: 250px;
+  margin-right: 20px;
+  padding-right: 20px;
+}
+.title {
+  margin-right: 30px;
+  font-size: 25px;
+  margin-left: 20px;
 }
 
+.contImage {
+  margin-right: 20px;
+  padding-right: 20px;
+}
+.logout {
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #141d22;
+    padding: 10px;
+    width: 900px;
+  }
+  .userIcon {
+    margin-right: 100px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1050px) {
+  .nav {
+    width: 1000px;
+  }
+  .userIcon {
+    margin-right: 100px;
+  }
+}

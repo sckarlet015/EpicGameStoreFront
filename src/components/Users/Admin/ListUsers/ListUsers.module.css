@@ -1,0 +1,61 @@
+.container {
+  width: 1300px;
+  justify-content: center;
+  align-items: center;
+}
+
+.lista {
+  padding: 10px;
+  width: 900px;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 30px;
+  padding: 15px;
+  width: 800px;
+}
+
+.botonBan {
+  width: 100px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #fe1212;
+  border-radius: 4px;
+  background-color: #dc1111;
+  appearance: none;
+  cursor: pointer;
+  margin: 10px;
+  margin-bottom: 15px;
+}
+
+.select {
+  width: 200px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none;
+}
+
+.state {
+  margin: 10px;
+  color: aliceblue;
+}
+
+.rol {
+  margin: 10px;
+  color: aliceblue;
+}
+
+.name {
+  margin: 10px;
+  color: aliceblue;
+}
+.containerDescript{
+
+  width: 800px;
+  padding: 10px;
+}
